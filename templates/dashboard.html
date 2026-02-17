@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - Lung Nodule Detection{% endblock %}
+
+{% block content %}
+<h2>Your Dashboard</h2>
+
+<p>Welcome, <strong>{{ user.name }}</strong> ({{ user.email }})</p>
+
+<h3 style="margin-top: 30px;">Your CT Scans ({{ scans|length }})</h3>
+
+{% if scans %}
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background: #667eea; color: white;">
+            <th style="padding: 10px; text-align: left;">File Name</th>
+            <th style="padding: 10px; text-align: left;">Upload Date</th>
+            <th style="padding: 10px; text-align: left;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for scan in scans %}
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding: 10px;">{{ scan.file_name }}</td>
+            <td style="padding: 10px;">{{ scan.upload_date.strftime('%Y-%m-%d %H:%M:%S') if scan.upload_date else 'N/A' }}</td>
+            <td style="padding: 10px;">
+                {% if scan.file_name %}
+                <a href="{{ url_for('serve_prediction', fname=scan.file_name) }}" target="_blank" class="btn" style="padding: 5px 10px; font-size: 14px;">View</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p style="margin-top: 20px; color: #666;">No scans uploaded yet. <a href="{{ url_for('index') }}">Upload your first scan</a></p>
+{% endif %}
+
+<a href="{{ url_for('index') }}" class="btn" style="margin-top: 20px;">Upload New Scan</a>
+{% endblock %}

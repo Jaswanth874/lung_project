@@ -1,0 +1,12 @@
+Flask
+requests
+Pillow
+numpy
+scipy
+
+# Database + auth
+SQLAlchemy
+Werkzeug
+
+# Optional (if you have GPU/torch):
+# torch

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Analysis Result - Lung Nodule Detection{% endblock %}
+
+{% block content %}
+<h2>Analysis Results</h2>
+
+<div style="background: #e7f3ff; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>Confidence Score: {{ "%.2f"|format(score * 100) }}%</h3>
+    <p>Score: {{ "%.4f"|format(score) }}</p>
+</div>
+
+{% if boxes %}
+<h3>Detected Nodules: {{ boxes|length }}</h3>
+<ul>
+    {% for box in boxes %}
+    <li>Box {{ loop.index }}: ({{ "%.1f"|format(box[0]) }}, {{ "%.1f"|format(box[1]) }}) to ({{ "%.1f"|format(box[2]) }}, {{ "%.1f"|format(box[3]) }}) - Confidence: {{ "%.2f"|format(box[4] * 100) }}%</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No nodules detected.</p>
+{% endif %}
+
+{% if image_fname %}
+<div style="margin: 20px 0;">
+    <h3>Annotated Image:</h3>
+    <img src="{{ url_for('serve_prediction', fname=image_fname) }}" alt="Analysis Result" style="max-width: 100%; border: 2px solid #667eea; border-radius: 5px;">
+</div>
+{% endif %}
+
+<form method="POST" action="{{ url_for('generate_report_route') }}" style="margin-top: 30px;">
+    <input type="hidden" name="score" value="{{ score }}">
+    <input type="hidden" name="image_fname" value="{{ image_fname }}">
+    <input type="hidden" name="boxes" value="{{ boxes }}">
+    <button type="submit" class="btn">Generate Clinical Report</button>
+</form>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary" style="margin-top: 10px;">Analyze Another Scan</a>
+{% endblock %}
