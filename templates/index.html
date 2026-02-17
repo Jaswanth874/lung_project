@@ -3,7 +3,47 @@
 {% block title %}Home - Lung Nodule Detection{% endblock %}
 
 {% block content %}
-<h2>CT Scan Analysis</h2>
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-left">
+            <h1 class="hero-title">Early Detection Saves Lives</h1>
+            <p class="hero-subtitle">
+                AI-powered CT scan analysis for accurate lung nodule detection. 
+                Get instant results with advanced machine learning technology.
+            </p>
+            <div class="hero-cta">
+                {% if user %}
+                    <a href="#upload-section" class="btn">🔍 Analyze CT Scan</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="btn">Get Started</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline" style="background: var(--white); color: var(--primary); border-color: var(--primary);">Sign In</a>
+                {% endif %}
+            </div>
+            <div class="feature-badges" style="margin-top: 2rem;">
+                <span class="badge badge-primary">🤖 AI-Powered</span>
+                <span class="badge badge-success">⚡ Fast Analysis</span>
+                <span class="badge" style="background: var(--accent);">📊 Accurate Results</span>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="medical-illustration">
+                <div class="illustration-content">
+                    <div class="illustration-icon">🫁</div>
+                    <div class="illustration-title">AI Detection</div>
+                    <div class="illustration-subtitle">Advanced Machine Learning</div>
+                    <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
+                        <div style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🔬</div>
+                        <div style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💊</div>
+                        <div style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📈</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 id="upload-section">CT Scan Analysis</h2>
 
 {% if not user %}
 <div class="info-box warning">
