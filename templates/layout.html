@@ -48,10 +48,15 @@
         }
         
         header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
             color: var(--white);
-            padding: 1.5rem 2rem;
-            box-shadow: var(--shadow-md);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         header .header-content {
@@ -62,23 +67,45 @@
             margin: 0 auto;
         }
         
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: transform 0.2s ease;
         }
         
-        h1::before {
-            content: "🫁";
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-icon {
             font-size: 2rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        
+        .logo-text .subtitle {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         
         nav {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
         }
         
@@ -86,15 +113,55 @@
             color: var(--white);
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.625rem 1.25rem;
             border-radius: 0.5rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.9375rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+        
+        nav a:hover::before {
+            left: 0;
         }
         
         nav a:hover {
             background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a:active {
+            transform: translateY(0);
+        }
+        
+        /* Active navigation link indicator */
+        nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px 2px 0 0;
         }
         
         main {
@@ -370,14 +437,32 @@
         }
         
         @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
             header .header-content {
                 flex-direction: column;
                 gap: 1rem;
             }
             
+            .logo-text {
+                font-size: 1.25rem;
+            }
+            
+            .logo-text .subtitle {
+                font-size: 0.625rem;
+            }
+            
             nav {
                 flex-wrap: wrap;
                 justify-content: center;
+                width: 100%;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
             }
             
             main {
@@ -388,6 +473,27 @@
                 font-size: 1.5rem;
             }
         }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Header scroll effect */
+        @keyframes headerSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        header {
+            animation: headerSlideDown 0.3s ease;
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -395,15 +501,21 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <h1>Lung Nodule Detection System</h1>
+                <a href="{{ url_for('index') }}" class="logo">
+                    <span class="logo-icon">🫁</span>
+                    <div class="logo-text">
+                        <span>Lung Nodule Detection</span>
+                        <span class="subtitle">AI-Powered Analysis</span>
+                    </div>
+                </a>
                 <nav>
-                    <a href="{{ url_for('index') }}">Home</a>
+                    <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Home</a>
                     {% if user %}
-                        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a>
                         <a href="{{ url_for('logout') }}">Logout</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}">Login</a>
-                        <a href="{{ url_for('register') }}">Register</a>
+                        <a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}">Login</a>
+                        <a href="{{ url_for('register') }}" class="{% if request.endpoint == 'register' %}active{% endif %}">Register</a>
                     {% endif %}
                 </nav>
             </div>
