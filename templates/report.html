@@ -66,15 +66,15 @@
     <p style="color: var(--text-light); margin-bottom: 1.5rem;">
         Download this report in your preferred format for documentation and sharing.
     </p>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <div class="btn-group">
         <a href="{{ url_for('download_report') }}" class="btn">
-            📄 Download TXT
+            <span>📄 Download TXT</span>
         </a>
         <a href="{{ url_for('download_report_pdf') }}" class="btn btn-secondary">
-            📑 Download PDF
+            <span>📑 Download PDF</span>
         </a>
         <a href="{{ url_for('index') }}" class="btn btn-outline">
-            🏠 Back to Home
+            <span>🏠 Back to Home</span>
         </a>
     </div>
 </div>

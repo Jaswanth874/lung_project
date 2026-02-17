@@ -43,8 +43,8 @@
                     </td>
                     <td>
                         {% if scan.file_name %}
-                        <a href="{{ url_for('serve_prediction', fname=scan.file_name) }}" target="_blank" class="btn" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
-                            👁️ View
+                        <a href="{{ url_for('serve_prediction', fname=scan.file_name) }}" target="_blank" class="btn btn-small">
+                            <span>👁️ View</span>
                         </a>
                         {% endif %}
                     </td>
