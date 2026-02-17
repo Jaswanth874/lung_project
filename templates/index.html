@@ -14,10 +14,16 @@
             </p>
             <div class="hero-cta">
                 {% if user %}
-                    <a href="#upload-section" class="btn">🔍 Analyze CT Scan</a>
+                    <a href="#upload-section" class="btn btn-large">
+                        <span>🔍 Analyze CT Scan</span>
+                    </a>
                 {% else %}
-                    <a href="{{ url_for('register') }}" class="btn">Get Started</a>
-                    <a href="{{ url_for('login') }}" class="btn btn-outline" style="background: var(--white); color: var(--primary); border-color: var(--primary);">Sign In</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-large">
+                        <span>Get Started</span>
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline btn-large" style="background: var(--white); color: var(--primary); border-color: var(--primary);">
+                        <span>Sign In</span>
+                    </a>
                 {% endif %}
             </div>
             <div class="feature-badges" style="margin-top: 2rem;">
@@ -49,9 +55,13 @@
 <div class="info-box warning" style="margin-top: 2rem;">
     <h3 style="margin-top: 0; color: #92400e;">🔒 Authentication Required</h3>
     <p style="margin-bottom: 1rem; color: #78350f;">Please log in to analyze CT scans and access all features.</p>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="{{ url_for('login') }}" class="btn">Login</a>
-        <a href="{{ url_for('register') }}" class="btn btn-secondary">Create Account</a>
+    <div class="btn-group">
+        <a href="{{ url_for('login') }}" class="btn">
+            <span>Login</span>
+        </a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary">
+            <span>Create Account</span>
+        </a>
     </div>
 </div>
 {% else %}
@@ -128,13 +138,13 @@
         </div>
         {% endif %}
         
-        <div style="display: flex; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--border); flex-wrap: wrap;">
-            <button type="submit" class="btn" style="flex: 1; min-width: 200px;">
-                🔍 Analyze Scan
+        <div class="btn-group" style="margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--border);">
+            <button type="submit" class="btn">
+                <span>🔍 Analyze Scan</span>
             </button>
             {% if user %}
-            <a href="{{ url_for('dashboard') }}" class="btn btn-outline" style="flex: 1; min-width: 200px; text-align: center;">
-                📊 View History
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+                <span>📊 View History</span>
             </a>
             {% endif %}
         </div>
