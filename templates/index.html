@@ -49,6 +49,49 @@
     </div>
 </div>
 
+<!-- Features Section -->
+<div class="features-section">
+    <h2 class="features-title">Why Choose Our Platform?</h2>
+    <p class="features-subtitle">
+        Advanced AI technology meets secure, user-friendly design for the best lung nodule detection experience.
+    </p>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title">AI-Powered Detection</h3>
+            <p class="feature-description">
+                Leverage cutting-edge machine learning algorithms trained on thousands of CT scans. 
+                Our AI models provide accurate nodule detection with high confidence scores, 
+                helping clinicians make informed decisions faster.
+            </p>
+            <a href="#upload-section" class="feature-link">Learn more</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">Secure Authentication</h3>
+            <p class="feature-description">
+                Your medical data is protected with enterprise-grade security. All scans are encrypted, 
+                and user authentication ensures only authorized access. HIPAA-compliant infrastructure 
+                keeps patient information safe and confidential.
+            </p>
+            <a href="{{ url_for('register') if not user else '#' }}" class="feature-link">Get started</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">Fast & Accurate Results</h3>
+            <p class="feature-description">
+                Get analysis results in seconds, not hours. Our optimized AI pipeline processes CT scans 
+                quickly while maintaining high accuracy. Generate comprehensive clinical reports instantly 
+                for immediate clinical decision support.
+            </p>
+            <a href="#upload-section" class="feature-link">Try it now</a>
+        </div>
+    </div>
+</div>
+
 <div id="upload-section"></div>
 
 {% if not user %}
