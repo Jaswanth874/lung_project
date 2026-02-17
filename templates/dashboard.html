@@ -61,12 +61,18 @@
     <p style="color: var(--text-light); margin-bottom: 2rem;">
         You haven't uploaded any CT scans yet. Start by uploading your first scan!
     </p>
-    <a href="{{ url_for('index') }}" class="btn">📤 Upload Your First Scan</a>
+    <a href="{{ url_for('index') }}" class="btn btn-large">
+        <span>📤 Upload Your First Scan</span>
+    </a>
 </div>
 {% endif %}
 
-<div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-    <a href="{{ url_for('index') }}" class="btn">➕ Upload New Scan</a>
-    <a href="{{ url_for('logout') }}" class="btn btn-outline">🚪 Logout</a>
+<div class="btn-group" style="margin-top: 2rem;">
+    <a href="{{ url_for('index') }}" class="btn">
+        <span>➕ Upload New Scan</span>
+    </a>
+    <a href="{{ url_for('logout') }}" class="btn btn-outline">
+        <span>🚪 Logout</span>
+    </a>
 </div>
 {% endblock %}

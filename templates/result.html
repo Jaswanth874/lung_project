@@ -59,13 +59,17 @@
         <input type="hidden" name="image_fname" value="{{ image_fname }}">
         <input type="hidden" name="boxes" value="{{ boxes }}">
         <button type="submit" class="btn">
-            📋 Generate Clinical Report
+            <span>📋 Generate Clinical Report</span>
         </button>
     </form>
 </div>
 
-<div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-    <a href="{{ url_for('index') }}" class="btn btn-secondary">🔄 Analyze Another Scan</a>
-    <a href="{{ url_for('dashboard') }}" class="btn btn-outline">📊 View Dashboard</a>
+<div class="btn-group" style="margin-top: 2rem;">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+        <span>🔄 Analyze Another Scan</span>
+    </a>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+        <span>📊 View Dashboard</span>
+    </a>
 </div>
 {% endblock %}
