@@ -3,21 +3,35 @@
 {% block title %}Login - Lung Nodule Detection{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
+<div style="max-width: 500px; margin: 0 auto;">
+    <h2>🔐 Login</h2>
+    <p style="color: var(--text-light); margin-bottom: 2rem;">Sign in to access the lung nodule detection system</p>
 
-<form method="POST" action="{{ url_for('login') }}">
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <div class="card">
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="email">📧 Email Address</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">🔒 Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">
+                Sign In
+            </button>
+        </form>
     </div>
-    
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    
-    <button type="submit" class="btn">Login</button>
-</form>
 
-<p style="margin-top: 20px;">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--background); border-radius: 0.5rem;">
+        <p style="color: var(--text-light); margin: 0;">
+            Don't have an account? 
+            <a href="{{ url_for('register') }}" style="color: var(--primary); font-weight: 600; text-decoration: none;">
+                Create one here →
+            </a>
+        </p>
+    </div>
+</div>
 {% endblock %}

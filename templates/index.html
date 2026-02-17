@@ -6,37 +6,70 @@
 <h2>CT Scan Analysis</h2>
 
 {% if not user %}
-<div style="background: #fff3cd; padding: 20px; border-radius: 5px; margin: 20px 0;">
-    <p><strong>Please log in to analyze CT scans.</strong></p>
-    <a href="{{ url_for('login') }}" class="btn">Login</a>
-    <a href="{{ url_for('register') }}" class="btn btn-secondary">Register</a>
+<div class="info-box warning">
+    <h3 style="margin-top: 0; color: #92400e;">🔒 Authentication Required</h3>
+    <p style="margin-bottom: 1rem; color: #78350f;">Please log in to analyze CT scans and access all features.</p>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="{{ url_for('login') }}" class="btn">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary">Create Account</a>
+    </div>
 </div>
 {% else %}
-<p>Welcome, <strong>{{ user.name }}</strong>! Upload a CT scan or provide an image URL to analyze.</p>
+<div class="info-box success">
+    <p style="margin: 0; font-weight: 500;">Welcome back, <strong>{{ user.name }}</strong>! Ready to analyze CT scans.</p>
+</div>
 
-<form method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="file">Upload CT Scan (.mhd) or Image:</label>
-        <input type="file" id="file" name="file" accept=".mhd,.mha,.nii,.nii.gz,.png,.jpg,.jpeg">
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin-top: 0;">Upload CT Scan</h3>
+        <p style="color: var(--text-light); margin: 0;">Upload a CT scan file or provide an image URL for AI-powered nodule detection</p>
     </div>
-    
-    <div class="form-group">
-        <label for="url">Or provide image URL:</label>
-        <input type="text" id="url" name="url" placeholder="https://example.com/image.png">
-    </div>
-    
-    {% if models %}
-    <div class="form-group">
-        <label for="model">Select Model:</label>
-        <select id="model" name="model">
-            {% for model in models %}
-            <option value="{{ model }}" {% if 'retina' in model.lower() %}selected{% endif %}>{{ model }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    {% endif %}
-    
-    <button type="submit" class="btn">Analyze Scan</button>
-</form>
+
+    <form method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">📁 Upload CT Scan (.mhd) or Image</label>
+            <input type="file" id="file" name="file" accept=".mhd,.mha,.nii,.nii.gz,.png,.jpg,.jpeg" required>
+            <small style="color: var(--text-light); display: block; margin-top: 0.5rem;">
+                Supported formats: .mhd, .mha, .nii, .nii.gz, .png, .jpg, .jpeg
+            </small>
+        </div>
+        
+        <div class="form-group">
+            <label for="url">🔗 Or provide image URL</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com/image.png">
+            <small style="color: var(--text-light); display: block; margin-top: 0.5rem;">
+                Leave empty if uploading a file
+            </small>
+        </div>
+        
+        {% if models %}
+        <div class="form-group">
+            <label for="model">🤖 Select AI Model</label>
+            <select id="model" name="model">
+                {% for model in models %}
+                <option value="{{ model }}" {% if 'retina' in model.lower() %}selected{% endif %}>{{ model }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <button type="submit" class="btn">
+                🔍 Analyze Scan
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline">View History</a>
+        </div>
+    </form>
+</div>
+
+<div class="card" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
+    <h3 style="margin-top: 0; color: var(--primary);">ℹ️ How It Works</h3>
+    <ol style="padding-left: 1.5rem; line-height: 2;">
+        <li><strong>Upload</strong> your CT scan or medical image</li>
+        <li><strong>AI Analysis</strong> detects potential lung nodules with confidence scores</li>
+        <li><strong>Review</strong> detection results with bounding boxes</li>
+        <li><strong>Generate</strong> clinical reports for documentation</li>
+    </ol>
+</div>
 {% endif %}
 {% endblock %}
