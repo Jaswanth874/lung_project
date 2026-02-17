@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: lung-nodule-detection
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: FLASK_SECRET
+        generateValue: true
+      - key: FLASK_PORT
+        value: 5000
+      - key: PYTHON_VERSION
+        value: 3.9.12

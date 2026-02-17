@@ -435,4 +435,6 @@ def dashboard():
 if __name__ == '__main__':
     # Allow overriding the port via FLASK_PORT to avoid conflicts (e.g., Streamlit on 8501)
     port = int(os.environ.get('FLASK_PORT', '5000'))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    # Use debug=False in production
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)

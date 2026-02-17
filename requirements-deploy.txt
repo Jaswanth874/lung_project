@@ -1,0 +1,44 @@
+# Production deployment requirements
+# Combines web and ML dependencies
+
+# Web Framework
+Flask>=2.3.0
+gunicorn>=21.2.0
+
+# Database
+SQLAlchemy>=2.0.0
+Werkzeug>=2.3.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Image Processing
+Pillow>=10.0.0
+
+# Scientific Computing
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Machine Learning (Optional - can be commented out if not needed)
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# Medical Imaging (Optional)
+# SimpleITK>=2.3.0
+
+# Data Processing
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+
+# PDF Generation (for reports)
+reportlab>=4.0.0
+
+# Google Gemini API (for RAG)
+google-generativeai>=0.3.0
